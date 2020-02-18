@@ -1,0 +1,80 @@
+\documentclass[oneside,12pt,fleqn]{memoir}%% planetary-system-hoitpoints
+
+%% colors
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{antiquefuchsia}{rgb}{0.57, 0.36, 0.51}
+\definecolor{violetw}{rgb}{0.93, 0.51, 0.93}
+\definecolor{Veronica}{rgb}{0.63, 0.36, 0.94}
+\definecolor{atomictangerine}{rgb}{1.0, 0.6, 0.4}
+\definecolor{darkgray}{rgb}{0.66, 0.66, 0.66}
+\definecolor{brightcerulean}{rgb}{0.11, 0.67, 0.84}
+\definecolor{cadmiumorange}{rgb}{0.93, 0.53, 0.18}
+\definecolor{ochre}{rgb}{0.8, 0.47, 0.13}
+\definecolor{midnightblue}{rgb}{0.1, 0.1, 0.44}
+\definecolor{grey}{rgb}{0.7, 0.75, 0.71}
+\definecolor{bf}{RGB}{88, 86, 88}
+\definecolor{bb}{RGB}{177, 177, 177}
+%%indice analitico: necessari per printindex
+\usepackage{makeidx}
+\makeindex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% importa pacchetti
+\usepackage{usepkg}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtocontents{toc}{\cftpagenumbersoff{part}} %% part senza numero pagina in toc
+%%%%%%%%%%%%%%%%%% titletoc, titlesec setting.
+%%%%%%%%%%%%%%%%%%      pagestyle
+\usepackage{titleT}
+\pagestyle{plain}
+%%%%%%%%%%%%%%%%%% length
+\usepackage{mylength}
+%%%%%%%%%%%% Hyperref package
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Funzioni generali
+\usepackage{functions}
+%http://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include
+\usepackage{sources}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Funzioni per questo file main
+\usepackage{mathOp}
+\usepackage{LocalF}
+%%%%%%% Metadata
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\raggedbottom %http://tex.stackexchange.com/questions/102084/annoying-paragraph-spacing-issue-with-memoir
+%% CAption subcaption figure %%% captionsetup
+%\captionsetup[subfigure]{labelformat}
+    \makeatletter
+    \renewcommand\@memmain@floats{%
+      \counterwithout{figure}{section}
+      \counterwithout{table}{section}
+  \counterwithout{figure}{chapter}
+    \counterwithout{figure}{subfigure}
+      \counterwithout{table}{chapter}
+      \counterwithin{figure}{part}
+      \counterwithin{table}{part}
+	\renewcommand{\thesubfigure}{\arabic{part}-\arabic{figure}.\alph{subfigure}}
+	\renewcommand{\thefigure}{\arabic{part}-\arabic{figure}}
+	\renewcommand{\thetable}{\arabic{part}-\arabic{table}}
+      }
+    \makeatother
+%%%%
+%%% SOlve page pre chapter at begginning page without number%@ps
+\chapterstyle{plain}
+%\author{}
+\title{PPS-hotpoints}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents*
+
+\subfile{bibsunto}
+
+\end{document}

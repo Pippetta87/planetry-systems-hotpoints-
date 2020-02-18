@@ -1,0 +1,550 @@
+% the tikz-er2.sty package is available at:
+% http://tagus.inesc-id.pt/~pcalado/tikzer2/tikz-er2.
+\chapter{Da usare in tesi: rappels}
+\PartialToc
+
+\section{All tesi keywords}
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+\printbibliography[heading=bibintoc,filter=tesirappels,title={\textcolor{brilliantlavender}{Da mettere in SOS}}]
+\endgroup
+
+
+\chapter{Visual SSM}
+\PartialToc
+
+\section{SSM e HSSSM}
+
+\begingroup %%% grafico tikz generale
+
+\tikzstyle{every entity} = [fill=blue!30, draw=blue!50!black!100, drop shadow,text width=2cm]
+
+\tikzstyle{every weak entity}=[fill=black!20!white!100]
+
+\tikzstyle{every attribute} = [fill=yellow!100, draw=yellow, node distance=1cm, drop shadow,text width=1.5cm, fill opacity=0.5]
+
+\tikzstyle{every relationship} = [top color=white, bottom color=red!20, draw=red!50!black!100, drop shadow,text width=2cm]
+
+\centering
+\scalebox{.25}{
+\begin{tikzpicture}[node distance=1.5cm, every edge/.style={link}]
+
+  \node[entity] (ssm) at (0,0) {SSM};
+\draw[link,<-]  (ssm.120)--++(120:2cm) node[attribute,anchor=120+180] (hydro) {Equilibrio idrostatico};
+\draw[link,<-]  (ssm.160)--++(160:2cm) node[attribute,anchor=160+180] (thermal) {Equilibrio termico locale};
+\draw[link,<-]  (ssm.200)--++(200:2cm) node[attribute, anchor=200+180] (opacity) {Equilibrio radiativo + criterio di Schwartzchild};
+
+\node[relationship] (calibration) [above =3cm of ssm] {Calibrazione luminosit\'a e raggio} edge[<-] (ssm);
+
+\node[entity] (unphys) [below=2cm of ssm] {Incertezze fisica del modello} edge [<-] (ssm);
+\draw[link,<->] (unphys.200)--++(200:4cm) node[attribute, anchor=200+180] (diffusion) {Diffusione};
+\draw[link,<->] (unphys.215)--++(215:2cm) node[attribute, anchor=215+180] (MLT) {Modello convezione: MLT.};
+\draw[link,<->] (unphys.250)--++(250:4cm) node[attribute, anchor=250+180] (modefreqsurf) {Influenza della zona superficiale sulle frequenze delle oscillazioni};
+
+\node[entity] (surfaceobs) [above right=3cm and 3cm of ssm] {Osservabili stellari};
+\draw[link,->] (surfaceobs.90)--++(90:2cm) node[attribute, anchor=90+180] {Misura metellicit\'a superficiale};
+
+\node[entity] (modelobs) [below=3cm of surfaceobs.south east,anchor=north] {Discrepanze modello/osservazioni}; 
+\node[entity,anchor=north west] (corrections) at (modelobs.south east) {Correzioni} edge [->,in=30,out=60] (ssm);
+\node[entity,anchor=north west] (sismobs) at (surfaceobs.south east) {Osservabili sismologiche};
+\draw[link,->]  (sismobs.45)--++(45:3cm) node[attribute, anchor=45+180] (freqs) {Frequenze oscillazioni adiabatiche};
+\draw[link,->] (sismobs.5)--++(5:2cm) node[attribute, anchor=5+180] (radiuscz) {Raggio fondo zona convettiva};
+\draw[link,->] (sismobs.8)--++(8:4cm) node[attribute, anchor=8+180] (heliumenv) {$Y_{ph}$};
+\draw[link,->] (sismobs.345)--++(345:5cm) node[attribute, anchor=345+180] (soundspeed) {Velocit\'a del suono (isothermal): $c_s(r)/u(r)$};
+\draw[link,->] (sismobs.30)--++(30:4cm) node[attribute,anchor=30+180] (densitybcz) {Densit\'a fondo zona convettiva $\rho_{cz}$};
+\draw[link,->] (ssm.315)--++(315:2cm) node[entity, anchor=315+180] (ssmoscmodes) {Soluzione problema agli autovalori modi normali adiabatici};
+\node[entity,below=1.5cm of modelobs] (inversion)  {Tecniche di inversione};
+\draw[link,->] (sismobs.215)--(inversion.50);
+
+\node[entity,anchor=north west] (neutrinoflux) at (sismobs.south east) {Flusso neutrini solari};
+
+\draw[link,<->] (surfaceobs.200) -- (unphys.50) node [sloped,pos=0.5, anchor=north] (stellaracc) {accuratezza};
+\draw[link,<->] (sismobs.270) -- (unphys.60) node [sloped,pos=0.5, anchor=south] (sismacc) {accuratezza};
+
+\node[draw,purple,fit=(hydro)(thermal)(opacity)(unphys)(ssm),ellipse,label={[purple,label distance=1cm]120:Modello Solare standard}] (ssmapprox) at (hydro.west) {};
+\node[weak entity,anchor=east] (ssmapproxlist) at (ssmapprox.west) {Oltre il SSM:
+\begin{itemize*} \item Composizione superficiale \item modelli idrodinamici dell'atmosfera e inclusione di effetti NLTE \item Effetto screening degli elettroni sulle reazioni nucleari\end{itemize*} };
+
+\end{tikzpicture}
+
+}
+
+\endgroup %% fine grafico tikz
+
+\newrefcontext[sorting=hot]
+
+{\let\clearpage\relax
+\chapter{Modello solare}}
+\PartialToc
+
+\begin{refsection}[solarmodels.bib]
+
+\section{SSM: input2output and uncertainties}
+\nocite{*}
+
+\begingroup
+\let\clearpage\relax
+
+\printbibliography[filter=SSMinout,keyword={rev},heading=bibintoc,title={\textcolor{bittersweet}{Biblio about ''Risultati SSM e loro incertezze''}}]
+
+\printbibliography[filter=SSMinout, notkeyword={rev},heading=bibintoc,title={\textcolor{bittersweet}{Other refs about ''Risultati SSM e loro incertezze''}}]
+
+\endgroup
+
+\end{refsection}
+
+\begin{refsection}[KinHydRev.bib,StellarModelS.bib,RotationMagneticS.bib,sunmeasure.bib,solarmodels.bib]
+
+%\nocite{*}
+%\printbibliography[title={\textcolor{Orchid}{Bibliografia modello solare e oltre}}]
+
+\section{approssimazione equilibrio idrostatico}
+
+\section{Campo magnetico, rotazione, trasporto momento angolare}
+
+
+\begingroup
+\let\clearpage\relax
+\nocite{*}
+\printbibliography[filter=staticdeviation,keyword={rev},heading=bibintoc,title={\textcolor{violetw}{Biblio about ''Deviazioni da equlibrio idrostatico: campo magnetico, rotazione, trasporto momento angolare, turbolenza''}}]
+
+\printbibliography[filter=staticdeviation, notkeyword={rev},heading=bibintoc,title={\textcolor{violetw}{Other refs about ''Deviazioni da equlibrio idrostatico: campo magnetico, rotazione, trasporto momento angolare, turbolenza''}}]
+
+\endgroup
+
+\section{Modello solare evolutivo. Calibrazione $Y_0$ e $\alpha$ in funzione delle osservabili entro gli errori}
+
+\begingroup
+\let\clearpage\relax
+\nocite{*}
+\printbibliography[filter=SSMevolution,keyword={rev},heading=bibintoc,title={\textcolor{violetw}{Biblio about ''Modello solare evolutivo. Calibrazione in funziopne delle osservabili''}}]
+
+\printbibliography[filter=SSMevolution, notkeyword={rev},heading=bibintoc,title={\textcolor{violetw}{Other refs about ''Modello solare evolutivo. Calibrazione in funziopne delle osservabili''}}]
+
+\endgroup
+
+
+\end{refsection}
+
+
+\begin{refsection}[StellarModelS.bib,starRev.bib,cox.bib]
+
+\section{Energia interna ed equilibrio termico}
+
+\subsection{Equazione di stato}
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+\printbibliography[filter=eos,keyword={rev},heading=bibintoc,title={\textcolor{atomictangerine}{Biblio about ''Equazione di stato''}}]
+
+\printbibliography[filter=eos,notkeyword={rev},heading=bibintoc,title={\textcolor{atomictangerine}{Other refs about ''Equazione di stato''}}]
+
+\endgroup
+
+\subsection{Energia interna}
+
+Da cui ricavo le grandezze termodinamiche tipo $c_V$ etc
+
+
+\subsection{Trasporto radiativo}
+
+\begingroup
+\let\clearpage\relax
+\nocite{*}
+\printbibliography[filter=radiativetransport,keyword={rev},heading=bibintoc,title={\textcolor{darkgray}{Biblio about  ''Trasporto radiativo''}}]
+
+\printbibliography[filter=radiativetransport,notkeyword={rev},heading=bibintoc,title={\textcolor{darkgray}{Other refs about ''Trasporto radiativo''}}]
+
+\endgroup
+
+\subsection{Trasporto convettivo}
+
+\begingroup
+\let\clearpage\relax
+\nocite{*}
+\printbibliography[filter=convection,keyword={rev},heading=bibintoc,title={\textcolor{brightcerulean}{Biblio about ''Convective envelope''}}]
+
+\printbibliography[filter=convection,notkeyword={rev},heading=bibintoc,title={\textcolor{brightcerulean}{Other refs about ''Convective envelope''}}]
+
+\endgroup
+
+Modelli convezione ???
+
+\subsection{Reazioni nucleari}
+
+\begingroup
+\let\clearpage\relax
+\nocite{*}
+\printbibliography[filter=nuclear,keyword={rev},heading=bibintoc,title={\textcolor{cadmiumorange}{Biblio about ''Reazioni nucleari e neutrini''}}]
+
+\printbibliography[filter=nuclear,notkeyword={rev},heading=bibintoc,title={\textcolor{cadmiumorange}{Other refs about ''Reazioni nucleari e neutrini''}}]
+
+\endgroup
+
+\subsection{Fattore astrofisico}
+
+\subsection{Neutrini}
+
+\end{refsection}
+
+
+\begin{refsection}[StellarModelS.bib,solarmodels.bib,KinHydRev.bib]
+
+\nocite{*}
+\begingroup
+\let\clearpage\relax
+
+\printbibliography[filter=stellarplasma,keyword={rev},heading=bibintoc,title={\textcolor{lemon}{Biblio about ''Fisica del (trasporto nel) plasma stellare''}}]
+
+\printbibliography[filter=stellarplasma,notkeyword={rev},heading=bibintoc,title={\textcolor{lemon}{Other refs about ''Fisica del (trasporto nel) plasma stellare''}}]
+
+\endgroup
+
+\section{Non uniform state for gas mixture}
+
+
+
+\subsection{Boltzmann's equation}
+
+\begin{align*}
+&\PDy{t}{f_1}+\vec{c}_1\cdot\PDy{\vec{r}_1}{f_1}+\vec{F}_1\cdot\PDy{\vec{c}_1}{f_1}=\left(\PDy{t}{f_1}\right)_c\\
+&\PDy{t}{f_2}+\vec{c}_2\cdot\PDy{\vec{r}_2}{f_2}+\vec{F}_2\cdot\PDy{\vec{c}_2}{f_2}=\left(\PDy{t}{f_2}\right)_c&\intertext{dove:}\\
+&
+\end{align*}
+
+\subsection{Entropy}
+
+For a gas in uniform steady state
+
+\begin{align*}
+&H=\int f\ln{f}\,d^3c=n\overline{\ln{f}}\\
+&=n[\ln{n}+\frac{3}{2}\ln{\frac{m}{2\pi kT}}-\frac{3}{2}]&\intertext{Con $M$ total mass of the gas and $\midfrac{M}{\rho}=\midfrac{M}{nm}$}\\
+&H_0=\int H\,d^r=\frac{M}{m}[\ln{n}+\frac{3}{2}\ln{\frac{m}{2\pi kT}}-\frac{3}{2}]\\
+&(pg80-81)\\
+&S=-kH_0
+\end{align*}
+
+\subsection{Definition/Notation: binary encounters}
+
+$\vec{c}_1,\vec{c}_2$ denote velocity, and $\vec{c}_1',\vec{c}_2'$ denotes velocities of two molecules after encounter
+
+\begin{align*}
+&m_0=m_1+m_2,M_1=\frac{m_1}{m_0},M_2=\frac{m_2}{m_0}&\intertext{the center of mass of the two molecules will move uniformly throughout the encounter: its constant velocity is give by}\\
+&m_0\vec{G}=m_1\vec{c}_1+m_2\vec{c}_2=m_1\vec{c}_1'+m_2\vec{c}_2'&\intertext{the relative velocity of second resp. to first and viceversa,before and after encounter, are}\\
+&\vec{g}_{21}=\vec{c}_2-\vec{c}_1=-\vec{g}_{12},\ \vec{g}_{21}'=\vec{c}_2'-\vec{c}_1'=-\vec{g}_{12}'&\intertext{thus}\\
+&\vec{c}_1=\vec{G}+M_2\vec{g}_{12}, \vec{c}_2=\vec{G}+M_1\vec{g}_{21}\\
+&\vec{c}_1'=\vec{G}+M_2\vec{g}_{12}', \vec{c}_2'=\vec{G}+M_1\vec{g}_{21}'
+\end{align*}
+
+Let $\vec{k}$ be a unit vector in the direction connecting the center of mass of second molecule at closest approach to the first in a system in which the last one is at rest
+\begin{align*}
+&\vec{g}_{21}-\vec{g}_{21}'=2(\vec{g}_{21}\cdot\vec{k})\vec{k}=-2(\vec{g}_{21}'\cdot\vec{k})\vec{k}\\
+&\vec{c}_1'-\vec{c}_1=2M_2(\vec{g}_{21}\cdot\vec{k})\vec{k}=-2M_2(\vec{g}_{21}'\cdot\vec{k})\vec{k}\\
+&\vec{c}_2'-\vec{c}_2=-2M_1(\vec{g}_{21}\cdot\vec{k})\vec{k}=2M_1(\vec{g}_{21}'\cdot\vec{k})\vec{k}
+\end{align*}
+
+\subsection{Definition/Notation: Integrals}
+
+Sia $F(\vec{c})$
+\begin{align*}
+&n_1^2I_1(F)=\iint f_1^{(0)}f^{(0)}(F_1+F-F_1'-F')\,d^3k\,d^3c\\
+&[F,G]_1=\int G_1I_1(F)\,d^3c_1\\
+&[F_1+G_2,H_1+K_2]_{12}=\int F_1I_{12}(H_1+K_2)\,d^3c_1+\int G_2I_{21}(H_1+K_2)\,d^3c_2\\
+&n_1n_2\{F,G\}=n_1^2[F,G]_1+n_1n_2[F_1+F_2,G_1+G_2]_{12}+n_2^2[F,G]_2
+\end{align*}
+
+
+\subsection{Changes of molecular properties}
+
+\begin{align*}
+&\MDy{(n_1\overline{\phi}_1)}+n_1\overline{\phi}_1\PDof{\vec{r}}\cdot\vec{c}_0\\
+&-n_1\left\{ \MDy{\overline{\phi}_1}\overline{\vec{C}_1\cdot\PDy{\vec{r}}{\phi_1}}+(\vec{F}_1-\MDy{\vec{c}_0})\cdot\overline{\PDy{\vec{C}_1}{\phi_1}}\right.\\
+&\left.-\overline{\PDy{\vec{C}_1}{\phi_1}\vec{C}_1}:\PDof{\vec{r}}\vec{c}_0\right\}=n_1\Delta\overline{\phi_1}
+\end{align*}
+
+
+\subsection{Diffusion and thermal diffusion}
+(\cite[pp. 143-144]{chapman52gas})
+
+\begin{align*}
+&\overline{\vec{c}_1}-\overline{\vec{c}_2}=\overline{\vec{C}_1}-\overline{\vec{C}_2}=\frac{1}{n_1}\int f_1C_1\,d^3c_1-\frac{1}{n_2}\int f_2C_2\,d^3c_2\\
+&=-\frac{1}{3}n_1n_2[\{\vec{D},\vec{D}\}n\vec{d}_{12}+\{\vec{D},\vec{A}\}\PDy{\vec{r}}{\ln{T}}]
+\end{align*}
+
+
+\end{refsection}
+
+
+
+\begin{refsection}[solarmodels.bib,innocenti.bib,sunmeasure.bib]
+
+\section{Incertezze nel SSM}
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+%276
+\printbibliography[filter=ssmunphys,keyword={rev},heading=bibintoc,title={\textcolor{ochre}{Biblio about: ''Incertezze nei parametri e nella fisica usata nel SSM''}}]
+\printbibliography[filter=ssmunphys,notkeyword={rev},heading=bibintoc,title={\textcolor{ochre}{Other refs about: ''Incertezze nei parametri e nella fisica usata nel SSM''}}]
+\endgroup
+
+\subsection{Calibrazione modello solare}
+
+incertezza su $S_{11}$
+incertezza composizione
+\begin{itemize*}
+\item pressione gas
+\item pressione turbolenta == kinetic pressure
+\item radiation pressure $-->$ photon absorption
+\item magnetic pressure
+\end{itemize*}
+tabella input del mss: eta, luminosita, raggio,
+Incertezze negli input del SSM e quindi su $\alpha$ e $Y$
+
+\subsection{Incertezze nelle quantit\'a teoriche del modello solare rilevanti eliosismologicamente dovute alle incertezze negli input/parametri}
+
+%\renewcommand{\footrefs}{\citeauthor*{bahcall200610}\citeyear{bahcall200610} vs \citeauthor*{boothroyd2003our}\citeyear{boothroyd2003our}.}
+
+\end{refsection}
+
+
+{\let\clearpage\relax
+\chapter{Oscillazioni solari: forward problem. Eccitazione.}}
+\PartialToc
+
+\begin{refsection}[HAseismRev.bib,cox.bib,KinHydRev.bib,SModes.bib,Vstars.bib,waves.bib]
+
+\section{Eccitazione/Damping dei modi vs instabilit\'a}
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+\printbibliography[filter=smodesexcitation,keyword={rev},heading=bibintoc,title={\textcolor{amber}{Biblio about: ''Eccitazione modi solari''}}]
+\printbibliography[filter=smodesexcitation,notkeyword={rev},heading=bibintoc,title={\textcolor{amber}{Other refs about: ''Eccitazione modi solari''}}]
+
+\endgroup
+
+\subsection{Power spectra of p-modes}
+
+Un modello per descrivere l'eccitatazione dei modi p alle ampiezze osservate descrive l'interazione tra i modi e i moti turbolenti dovuti alla convezione tramite un insieme di oscillatori smorzati di frequenze naturali $\omega_{nl}$ e sottoposti a forzante stocastica: trascuro gli effetti non lineari e eventuali instabilit\'a intrinche alle pulsazioni.
+\begin{equation}
+I_{nl}[\TtwoDy{t}{\xi_{nl}}+\Gamma_{nl}\TDy{t}{\xi_{nl}}+\omega_0^2\xi_{nl}]=f(t)
+\end{equation}
+con $\xi_{nl}$ ampiezza dell'oscillatore, $\midfrac{\Gamma}{2}=\Im{\omega}$ costante di smorzamento e definisco l'inerzia del modo
+\begin{equation}
+I_{nl}=\int d^3x\rho_0(\vec{\xi}^*\cdot\vec{\xi})\label{eq:modeinertia}
+\end{equation}
+La funzione $f(t)$ contiene il contributo dei moti turbolenti e fluttuazioni entropia causati dai moti convettivi.
+
+Assumendo $\omega_{nl}\gg\Gamma_{nl}$, cio\'e gli scambi di energia tra i modi e la turbolenza hanno tempo caratteristico $\tau_{nad}\gg\Pi_{osc}$, lo spettro in frequenza dell'oscillatore $\exv{P(\omega)}=\exv{|\xi_{nl}(\omega)|^2}$ \'e della forma:
+\begin{equation}
+\exv{P(\omega)}\propto P_LP_f=\frac{\midfrac{\Gamma_{nl}}{2\pi}}{(\omega-\omega_0)^2+\midfrac{\Gamma_{nl}}{4}}P_f
+\end{equation}
+
+
+ Da \cite{libbrecht1988solar}: fig  energi/mode, power damping.
+La media temporale dell'energia di un modo \'e
+\begin{align}
+%E_{\omega_0}=\int_0^M\exv{v_{osc}^2}
+&E_{nl}=I_{nl}V_{nl}^2\\
+&=\frac{1}{2}I_{nl}\omega_{nl}\exv{|A_{nl}^2|}\propto I_{nl}\omega_{nl}\intsinf{}P(\omega)\,d\omega\\
+&\propto\frac{P_f(\omega_{nl})}{\Gamma_{nl}}
+\end{align}
+
+[$H=\int_{-\delta}^{+\delta}|\tilde{V}(\nu)|^2\,d\nu$]
+
+\begin{comment}%% Da finire oscillazioni
+[Si ipotizza che le oscillazioni siano eccitate in maniera stocastica dai moti convettivi: la larghezza delle frequenze risonanti \'e determinata dal tempo di smorzamento.]
+
+[Extensive turbolent layers: stars lose all hint of vibrational instability]
+
+[Not self excited: driven to observable amplitude by external process]
+
+[Turbolent convection: source of pulsational energy, emit acustic radiation]
+
+[Stable pulsation: spectrum as that of an ensemble of harmonic oscillator stocastically driven and damped]
+
+[Power spectrum indipendent of l for $l<100$: low degree modes are not influenced by $k_h$. Vertical propagation: superficial layers (low l modes are generated in these strata)]
+
+
+[Interaction with turbolent convection]
+
+[Radiative transfer (as frequencies rise modes became more sensitive to rapid relaxation time in solar atmosphere)]
+
+[La stabilit\'a dei modi g \'e determinata dalla stabilit\'a convettiva: se non sono presenti regioni di instabilit\'a convettiva i modi g sono stabili ($g_+$), se esistono zone convettivamente instabili esistono anche modi g instabili ($g_{\,-}$).]
+\end{comment}
+
+[Excitation p-modes: fluctuating turbolent pressure (Raynold stresses). Excitation g-modes: nuclear burning instabilities. Damping: radiative losses, viscosity, nonlinear interaction between modes.]
+
+[Low l p-modes exponential decay with e-folding time several days.]
+
+
+
+\subsection{Turbolenza: eccitazione stocastica e viscosit\'a}
+
+
+
+\subsection{tempo di vita: damping}
+\subsection{Effetti non lineari}
+\subsection{Overstability vs stochastic excitation}
+
+\section{Comportamento asintotico dei modi}
+
+\end{refsection}
+
+
+{\let\clearpage\relax
+\chapter{Oscillazioni solari: osservazione. Rimozione degenerazione: m frequency splitting.}}
+\PartialToc
+
+\section{Atmosfera solare}
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+\printbibliography[filter=atmosphere,keyword={rev},heading=bibsec,title={\textcolor{ochre}{Biblio about: ''Oscillazioni atmosfera.''}}]
+\printbibliography[filter=atmosphere,notkeyword={rev},heading=bibsec,title={\textcolor{ochre}{Other refs about: ''Oscillazioni atmosfera.''}}]
+
+
+\subsection{Oscillazioni dell'atmosfera solare}
+
+\cite{}
+Atmosfera: $N$ ha un massimo in coincidenza del punto $T_m$ nella cromosfera: modi g confinati tra zona convettiva e cromosfera ($\Pi\approx\numrange{180}{800}\si{\second}$).
+
+\endgroup
+
+\section{Rotazione: forward problem}
+
+\begin{refsection}[RotationMagneticS.bib,SModes.bib,ObsTechDataAnal-SM.bib,waves.bib,Vstars.bib]
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+\printbibliography[check=modesfreqobs,keyword={rev},heading=bibsec,title={\textcolor{ochre}{Biblio about: ''Osservazione dei modi: strumenti e splitting dovuto alla rotazione.''}}]
+\printbibliography[check=modesfreqobs,notkeyword={rev},heading=bibsec,title={\textcolor{ochre}{Other refs about: ''Osservazione dei modi: strumenti e splitting dovuto alla rotazione.''}}]
+
+
+\endgroup
+
+\section{Problematiche osservative}
+
+Na $D$ lines: $\lambda=\SI{589.6}{\nano\meter},\SI{589.0}{\nano\meter}$; SOHO (MDI): Ni \SI{678.8}{\nano\meter}; K Fraunhofer line \SI{770}{\nano\meter}; Ca \SI{643.9}{\nano\meter}; K \SI{769.9}{\nano\meter}
+
+\subsection{Doppler measurement: resonant scattering cell (GOLF)}
+
+%scatteringcell
+Principio funzionamento spettroscopio scatering risonante. Da \cite{brookes1978resonant}.
+
+\subsection{separazione contributi modi}
+\subsection{Frequency precision}
+
+\end{refsection}
+
+
+{\let\clearpage\relax
+\chapter{Inversione rotazione.}}
+\PartialToc
+
+\begin{refsection}[HelioInversion.bib]
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+\printbibliography[filter={rotationinversion},keyword={rev},heading=bibintoc,title={\textcolor{almond}{Biblio about: ''Inversione rotazione.''}}]
+\printbibliography[filter={rotationinversion},notkeyword={rev},heading=bibintoc,title={\textcolor{almond}{Other refs about: ''Inversione rotazione.''}}]
+
+
+\endgroup
+
+\section{First order degenerate perturbation: ROTATION.}
+
+\renewcommand{\footrefs}{Refs: \cite{ritzwoller1991unified}}
+
+\subsection{Approccio perturbativo: Degenerate perturbation}
+
+Per descrivere lo splitting in m generato dalla rotazione considero al primo ordine i modi del multipletto (n,l) dato che la distanza tra modi di diverso n o l \'e molto maggiore della separazione per m differenti nello stesso multipletto.
+
+La soluzione del problema diretto (determinazione degli splitting in m) che sar\'a trovato
+
+\subsection{Scomposizione tradizionale}
+
+\begin{align*}
+&\Omega(r,\theta)=\sum_{k=0,2,4,\ldots}\Omega_k(r)P_k(\cos{\theta})\\
+&\omega_{nl}^m=\omega_{nl}+l\sum_{i=1}^M\tensor[_n]{a}{_l_i}P_i(\midfrac{m}{l})
+\end{align*}
+
+\subsection{Forward problem: uso delle armoniche sferiche vettoriali}
+
+Decomposizione di laminar velocity field into poiloidal and toroidal component $\vec{P}$ and $\vec{T}$
+\begin{align*}
+&\vec{v}_{rot}=\vec{\Omega}(r,\theta,\phi)\wedge\vec{r}\\
+&=\sumzi{s}\sumft{t=-s}{s}[\vec{P}_t^s(r,\theta,\phi)+T_s^t(r,\theta,\phi)]
+\end{align*}
+
+Le funzioni $P$ e $T$ sono caratterizzate dai coefficienti dipendenti da r dell'espansione in armoniche sferiche $u_s^t(r)$, $v_s^t(r)$, $w_s^t(r)$:
+\begin{align*}
+&\vec{P}_t^s(r,\theta,\phi)=u_s^t(r)Y_s^t(\theta,\phi)\hat{r}+v_s^t(r)\nabla_1Y_s^t(\theta,\phi)\\
+&\vec{T}_t^s(r,\theta,\phi)=-w_s^t(r)\hat{r}\wedge\nabla_1Y_s^t(\theta,\phi)\\
+&\nabla_1=r[\nabla-\hat{r}(\hat{r}\cdot\nabla)]=\hat{\theta}\PDof{\theta}+\frac{\hat{\phi}}{\sin{\theta}}\PDof{\phi}\\
+&Y_s^t(\theta,\phi)=(-1)^t[\frac{2s+1}{4\pi}\frac{(t-s)!}{(t+s)!}]\expy{\midfrac{1}{2}}P_s^t(\cos{\theta}
+)\exp{it\phi}
+\end{align*}
+
+\begin{definition}{Funzioni armoniche sferiche vettoriali}
+
+\begin{align*}
+&ttt
+\end{align*}
+
+\end{definition}
+
+\renewcommand{\footrefs}{{}}
+
+\subsection{Misurazione spitting dei modi dovuto alla rotazione e campi magnetici interni}
+
+
+\end{refsection}
+
+
+{\let\clearpage\relax
+\chapter{Oscillazioni solari: inversione. Inversione struttura idrostatica}}
+\PartialToc
+
+
+\section{Isothermal sound speed: U}
+
+\begin{refsection}[HelioInversion.bib]
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+\printbibliography[filter={soundspeedU},keyword={rev},heading=bibintoc,title={\textcolor{almond}{Biblio about: ''Isothermal sound speed U''}}]
+\printbibliography[filter={soundspeedU},notkeyword={rev},heading=bibintoc,title={\textcolor{almond}{Other refs about: ''Isotherma sound speed U.''}}]
+
+
+\endgroup
+
+
+\end{refsection}
+
+
+{\let\clearpage\relax
+\chapter{Oscillazioni solari: inversione. Tecniche di inversione e fit. HSSM. Oltre il SSM.}}
+\PartialToc
+
+\begin{refsection}[HelioInversion.bib,beyond.bib]
+
+
+\section{Tecniche numeriche}
+
+
+\end{refsection}

@@ -1,0 +1,102 @@
+% the tikz-er2.sty package is available at:
+% http://tagus.inesc-id.pt/~pcalado/tikzer2/tikz-er2.
+%prep test
+
+\newrefcontext[sorting=hot]
+
+{\let\clearpage\relax
+\chapter{Fenomenologia sistema solare}}
+\PartialToc
+
+\section{Pianeti}
+
+\begin{refsection}[plan.bib]
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+\printbibliography[filter={solsysplanets},keyword={primary},heading=bibintoc,title={\textcolor{ao(english)}{Biblio about: ''Sistema solare.''}}]
+
+\printbibliography[filter={solsysplanets},notkeyword={primary},heading=bibintoc,title={\textcolor{ao(english)}{Other refs about: ''Sistema solare.''}}]
+
+\endgroup
+
+\end{refsection}
+
+\section{Pianeti terrestri}
+
+\begin{refsection}[plan.bib]
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+\printbibliography[filter={terrestrialplanets},keyword={primary},heading=bibintoc,title={\textcolor{beaver}{Biblio about: ''Sistema solare: pianeti terrestri''}}]
+
+\printbibliography[filter={terrestrialplanets},notkeyword={primary},heading=bibintoc,title={\textcolor{beaver}{Other refs about: ''Sistema solare: pianeti terrestri''}}]
+
+\endgroup
+
+\end{refsection}
+
+\section{Giganti gassosi}
+
+\begin{refsection}[plan.bib]
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+\printbibliography[filter={gasseousgiants},keyword={primary},heading=bibintoc,title={\textcolor{darkorange}{Biblio about: ''Sistema solare: Giganti gassosi''}}]
+
+\printbibliography[filter={gasseousgiants},notkeyword={primary},heading=bibintoc,title={\textcolor{darkorange}{Other refs about: ''Sistema solare: Giganti gassosi''}}]
+
+\endgroup
+
+\end{refsection}
+
+\section{Giganti ghiacciati}
+
+\begin{refsection}[plan.bib]
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+\printbibliography[filter={icegiants},keyword={primary},heading=bibintoc,title={\textcolor{darkpastelblue}{Biblio about: ''Sistema solare: Giganti ghiacciati''}}]
+\printbibliography[filter={icegiants},notkeyword={primary},heading=bibintoc,title={\textcolor{darkpastelblue}{Other refs about: ''Sistema solare: Giganti ghiacciati''}}]
+\endgroup
+\end{refsection}
+
+\section{Asteroidi: MB, NEO, Trojans}
+
+\begin{refsection}[plan.bib]
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+\printbibliography[filter={NEOMBT},keyword={primary},heading=bibintoc,title={\textcolor{darklava}{Biblio about: ''Sistema solare: Asteroidi (NEO e MB), troiani.''}}]
+
+\printbibliography[filter={icegiants},notkeyword={primary},heading=bibintoc,title={\textcolor{darklava}{Other refs about: ''Sistema solare: Asteroidi (NEO e MB), troiani.''}}]
+
+\endgroup
+
+\end{refsection}
+
+\section{TNO, fascia di Kuiper, comete, nube di Oort.}
+
+\begin{refsection}[plan.bib]
+
+\begingroup
+\nocite{*}
+\let\clearpage\relax
+
+\printbibliography[filter={cometTNOK},keyword={primary},heading=bibintoc,title={\textcolor{darkgray}{Biblio about: ''Sistema solare: Comete, TNO/Kuiper, Oort cloud.''}}]
+
+\printbibliography[filter={cometTNOK},notkeyword={primary},heading=bibintoc,title={\textcolor{darkgray}{Other refs about: ''Sistema solare: Comete, TNO/Kuiper, Oort cloud.''}}]
+
+\endgroup
+
+\end{refsection}
+
+\item \DTMsavedate{iwantanewlineanotherlongerbiiiggerr}{2018-03-12}\DTMusedate{iwantanewlineanotherlongerbiiiggerr}.

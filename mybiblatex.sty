@@ -1,0 +1,107 @@
+\ProvidesPackage{mybiblatex}
+
+%%%biblatex
+\usepackage[backend=biber,sorting=hot,maxbibnames=1,style=authoryear]{biblatex}
+
+\renewcommand*{\bibsetup}{% bibsetup
+  \interlinepenalty=10000\relax % default is 5000
+  \widowpenalty=10000\relax
+  \clubpenalty=10000\relax
+  \raggedbottom
+  \frenchspacing
+  \biburlsetup}
+  
+%%% biblatex sorting schemes
+\DeclareSortingScheme{hot}{
+\sort{\field{year}}
+\sort{\field{name}}
+}
+
+%%hedings
+\defbibheading{bibsec}[\bibname]{% heading section
+\section{#1}%
+%\markboth{#1}{#1}
+}
+
+%%biblatex filters
+\defbibfilter{tesirappels}{keyword={tesi}}%%% cose da usare in SOS ora
+%%%%
+
+%\iffieldequals
+%\ifkeyword{⟨keyword⟩}{⟨true⟩}{⟨false⟩}
+%\defbibfilter{modesfreqobs}{keyword={rotation} and (keyword={splitting} or %keyword={instruments} or keyword={splitting} or keyword={modes} or %keyword={frequencies})}
+%\iffieldequalstr{keyword}{rotation}
+
+%% Solar System Phenomenology
+\defbibfilter{solsysplanets}{keyword={planets} or keyword={planet} or keyword={solar system} or keyword={planet interior}}
+\defbibfilter{terrestrialplanets}{keyword={terrestrial planets} or keyword={terrestrial planets} or keyword={Earth} or keyword={Mercury} or keyword={Venus} or keyword={Mars}}
+\defbibfilter{gasseousgiants}{keyword={gasseous giants} or keyword={gasseous planets} or keyword={Jupiter} or keyword={Saturn}}
+\defbibfilter{icegiants}{keyword={ice giants} or keyword={ice planets} or keyword={Uranus} or keyword={Neptune}}
+\defbibfilter{NEOMBT}{keyword={NEO} or keyword={asteroids} or keyword={main belt} or keyword={MB} or keyword={trojans}}
+\defbibfilter{cometTNOK}{keyword={TNO} or keyword={Kuiper} or keyword={Oort} or keyword={comets}}
+
+%% Evolution
+
+
+%% Formation
+
+%% Observation techniques
+
+
+%%
+
+%%% SOS
+
+\defbibcheck{modesfreqobs}{\ifboolexpr{(test {\ifkeyword{splittings}} or test {\ifkeyword{instruments}} or test {\ifkeyword{keyword}{modes}} or test {\ifkeyword{frequencies}} or test {\ifkeyword{g-modes}} or test {\ifkeyword{p-modes}} or test {\ifkeyword{rotation}}) and test {\ifkeyword{rotation}}}{}{\skipentry}}%
+
+\defbibfilter{rotationinversion}{keyword={2D} or keyword={1.5D} or keyword={1D} or keyword={rotation}}
+
+\defbibfilter{SSMevolution}{keyword={SSM} or keyword={evolutive} or keyword={evolution} or keyword={calibration}}
+
+\defbibfilter{soundspeedU}{keyword={isothermal} or keyword={isothermal sound speed} or keyword={U}}
+
+\defbibfilter{smodesexcitation}{keyword={excitation} or keyword={line width} or keyword={damping} or keyword={non adiabatic}}
+
+\defbibfilter{atmosphere}{keyword={chromosphere} or keyword={atmosphere} or keyword={corona} or keyword={photosphere} or keyword={3-minute}}
+
+\defbibfilter{SSMinout}{keyword={SSM} or keyword={uncertainties} or keyword={Y} or keyword={ssm input} or keyword={calibration} or keyword={He} or keyword={input parameters} or keyword={ssm} or keyword={astrophysical factor} or keyword={nuclear reactions}}
+
+\defbibfilter{staticdeviation}{keyword={rotation} or keyword={magnetic field} or keyword={angular momentum} or keyword={turbulence} or keyword={hydrodynamics}}
+\defbibfilter{eos}{keyword={eos} or keyword={atomic} or keyword={DH}}
+\defbibfilter{radiativetransport}{keyword={opacity} or keyword={composition} or keyword={metallicity} or keyword={radiation pressure} or keyword={photons} or keyword={temperature gradient} or keyword={Cstability}}
+\defbibfilter{convection}{keyword={entropy} or keyword={turbulence} or keyword={convection} or keyword={hydrodynamics} or keyword={Cintability} or keyword={buoyancy}}
+\defbibfilter{nuclear}{keyword={neutrinos} or keyword={nuclear reactions} or keyword={astrophysical factor} or keyword={reaction rate} or keyword={fusion cross section} or keyword={Tc}}
+\defbibfilter{stellarplasma}{keyword={plasma} or keyword={diffusion} or keyword={coupling} or keyword={DH} or keyword={transport}}
+\defbibfilter{ssmunphys}{keyword={calibration} or keyword={uncertainties} or keyword={input parameters} or keyword={composition}}
+\defbibfilter{doppler}{keyword={modes} or keyword={doppler} or keyword={observations} or keyword={splitting}} %% doppler da definire
+
+
+%%% bibliography environment ... (printbibliography left aligned)
+\DeclareFieldFormat{labelnumberwidth}{#1\adddot}%
+
+% default bibliography environment (from biblatex.sty)
+\defbibenvironment{bibliography} 
+  {\list{}{%
+     \leftmargin\bibhang 
+     \itemindent-\leftmargin 
+     \itemsep\bibitemsep
+      \parsep\bibparsep}}
+  {\endlist}
+  {\item}
+
+% 'numeric' bibliography environment (from numeric.bbx)
+\defbibenvironment{bibliography}
+  {\list
+     {\printtext[labelnumberwidth]{%
+        \printfield{prefixnumber}%
+        \printfield{labelnumber}}}
+     {\setlength{\labelwidth}{\labelnumberwidth}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+     \addtolength{\leftmargin}{\labelsep}%
+      \addtolength{\leftmargin}{-\labelsep}% <-- changed
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}%
+      \renewcommand*{\makelabel}[1]{\hss##1}}
+  {\endlist}
+  {\item}
