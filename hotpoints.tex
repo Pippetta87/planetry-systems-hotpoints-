@@ -1,102 +1,41 @@
-% the tikz-er2.sty package is available at:
-% http://tagus.inesc-id.pt/~pcalado/tikzer2/tikz-er2.
-%prep test
+\documentclass[main.tex]{subfiles}
+
+\begin{document}
 
 \newrefcontext[sorting=hot]
+%\printbibliography[filter={terrestrialplanets},keyword={primary},heading=bibintoc,title={\textcolor{beaver}{Biblio about: ''Sistema solare: pianeti terrestri''}}]
+%\printbibliography[filter={terrestrialplanets},notkeyword={primary},heading=bibintoc,title={\textcolor{beaver}{Other refs about: ''Sistema solare: pianeti terrestri''}}]
 
 {\let\clearpage\relax
-\chapter{Fenomenologia sistema solare}}
-\PartialToc
+\chapter{Modelli di (e vincoli) formazione del sistema solare}
+}
 
-\section{Pianeti}
-
-\begin{refsection}[plan.bib]
-
+\begin{refsection}[solarsystem.bib]
 \begingroup
 \nocite{*}
 \let\clearpage\relax
-
-\printbibliography[filter={solsysplanets},keyword={primary},heading=bibintoc,title={\textcolor{ao(english)}{Biblio about: ''Sistema solare.''}}]
-
-\printbibliography[filter={solsysplanets},notkeyword={primary},heading=bibintoc,title={\textcolor{ao(english)}{Other refs about: ''Sistema solare.''}}]
-
+\printbibliography[filter={pps},heading=bibintoc,title={\textcolor{antiquefuchsia}{Vincoli a formazione planetaria da modelli/osservazioni formazione sistema solare}}]
 \endgroup
-
 \end{refsection}
 
-\section{Pianeti terrestri}
+\section{CAI, Chondrules etc}
 
-\begin{refsection}[plan.bib]
+{\let\clearpage\relax
+\chapter{Struttura orbitale sistemi planetarii}
+}
 
+\begin{refsection}[orbitalevolution.bib,migration.bib]
 \begingroup
 \nocite{*}
 \let\clearpage\relax
-
-\printbibliography[filter={terrestrialplanets},keyword={primary},heading=bibintoc,title={\textcolor{beaver}{Biblio about: ''Sistema solare: pianeti terrestri''}}]
-
-\printbibliography[filter={terrestrialplanets},notkeyword={primary},heading=bibintoc,title={\textcolor{beaver}{Other refs about: ''Sistema solare: pianeti terrestri''}}]
-
-\endgroup
-
-\end{refsection}
-
-\section{Giganti gassosi}
-
-\begin{refsection}[plan.bib]
-
-\begingroup
-\nocite{*}
-\let\clearpage\relax
-
-\printbibliography[filter={gasseousgiants},keyword={primary},heading=bibintoc,title={\textcolor{darkorange}{Biblio about: ''Sistema solare: Giganti gassosi''}}]
-
-\printbibliography[filter={gasseousgiants},notkeyword={primary},heading=bibintoc,title={\textcolor{darkorange}{Other refs about: ''Sistema solare: Giganti gassosi''}}]
-
-\endgroup
-
-\end{refsection}
-
-\section{Giganti ghiacciati}
-
-\begin{refsection}[plan.bib]
-\begingroup
-\nocite{*}
-\let\clearpage\relax
-\printbibliography[filter={icegiants},keyword={primary},heading=bibintoc,title={\textcolor{darkpastelblue}{Biblio about: ''Sistema solare: Giganti ghiacciati''}}]
-\printbibliography[filter={icegiants},notkeyword={primary},heading=bibintoc,title={\textcolor{darkpastelblue}{Other refs about: ''Sistema solare: Giganti ghiacciati''}}]
+\printbibliography[filter={pps},heading=bibintoc,title={\textcolor{antiquefuchsia}{Evoluzione orbitale in PPD e dopo che \'e dissipato}}]
 \endgroup
 \end{refsection}
 
-\section{Asteroidi: MB, NEO, Trojans}
+\section{Migration and (lack of) mean motion resonance capture}
+\cite{batygin2015capture}
+\begin{itemize}
+    \item modest predisposition for orbital resonance: exoplanet radial-velocity shows overabundancy of resonant giant planet, sub-jovian kepler planet distro shows enhacement outside $2:1$, $3:2$ commensurabilities
+\end{itemize}
 
-\begin{refsection}[plan.bib]
-
-\begingroup
-\nocite{*}
-\let\clearpage\relax
-
-\printbibliography[filter={NEOMBT},keyword={primary},heading=bibintoc,title={\textcolor{darklava}{Biblio about: ''Sistema solare: Asteroidi (NEO e MB), troiani.''}}]
-
-\printbibliography[filter={icegiants},notkeyword={primary},heading=bibintoc,title={\textcolor{darklava}{Other refs about: ''Sistema solare: Asteroidi (NEO e MB), troiani.''}}]
-
-\endgroup
-
-\end{refsection}
-
-\section{TNO, fascia di Kuiper, comete, nube di Oort.}
-
-\begin{refsection}[plan.bib]
-
-\begingroup
-\nocite{*}
-\let\clearpage\relax
-
-\printbibliography[filter={cometTNOK},keyword={primary},heading=bibintoc,title={\textcolor{darkgray}{Biblio about: ''Sistema solare: Comete, TNO/Kuiper, Oort cloud.''}}]
-
-\printbibliography[filter={cometTNOK},notkeyword={primary},heading=bibintoc,title={\textcolor{darkgray}{Other refs about: ''Sistema solare: Comete, TNO/Kuiper, Oort cloud.''}}]
-
-\endgroup
-
-\end{refsection}
-
-\item \DTMsavedate{iwantanewlineanotherlongerbiiiggerr}{2018-03-12}\DTMusedate{iwantanewlineanotherlongerbiiiggerr}.
+\end{document}

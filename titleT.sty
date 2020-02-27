@@ -1,17 +1,17 @@
 \ProvidesPackage{titleT}
 
 \usepackage{titletoc}
-\setcounter{tocdepth}{0}
+\setcounter{tocdepth}{1}
 
 \usepackage[compact,toctitles]{titlesec}
 \titleclass{\part}{top}
 
-\titleformat{\part}[block]{\huge\bfseries\centering\vspace*{\fill}}{\thepart}{10pt}{\huge}[\vspace*{\fill}] 
+\titleformat{\part}[block]{\huge\bfseries\centering\vspace*{\fill}}{\thepart}{10pt}{\huge}[\vspace*{\fill}]
 
 \titleformat{\chapter}[block]
-{\huge}{\chaptertitlename\ \thechapter:\ }{0pt}{\huge}
+{\huge}{C\thechapter:\ }{0pt}{\huge}[{\chaptoc}]
 
-\titleformat{\section}{\LARGE}{}{0pt}{\LARGE}
+\titleformat{\section}{\LARGE}{S\thechapter:\ }{0pt}{\LARGE}
 
 \titleformat{\subsection}[display]{\large}{}{0pt}{\large\scshape}[]
 

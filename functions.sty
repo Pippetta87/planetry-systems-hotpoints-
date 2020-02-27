@@ -24,7 +24,7 @@
 \printbibliography[heading=subbibliography]
 \end{refsection}}
 
-\newcommand{\cel}[4]{\tensor*[^{#2}_{#3}]{\mathrm{#1}}{_{#4}}}    %Chemical element ^A_PA_N: [^{A}_{P}]{\mathrm{X}}{_{N}}
+\newcommandx{\cel}[4][3={}, 4={}]{\tensor*[^{#2}_{#3}]{\mathrm{#1}}{_{#4}}}%Chemical element ^A_PA_N: [^{A}_{P}]{\mathrm{X}}{_{N}}
 
 %%% DDDD
 \newcommand{\dal}[1]{\nabla^2-\frac{1}{#1^2}\frac{\partial^2}{\partial t^2}}   %%% operatore di d'alambert: velocita da impostare. compatto
@@ -228,7 +228,21 @@
 %\makeatletter
 %\renewcommand\p@subsection{\thesection.}
 %\makeatother         										%%%%%
-
+%\printcontents[〈name〉]{〈prefix〉}{〈start-level〉}[〈toc-depth〉]{〈toc-code〉}
+\newcommand{\parttoc}{\stopcontents[chapters]
+\startcontents[chapters]
+\vspace*{1pc}\hrule\vspace*{0.5pc}% toc at beginning chapter
+\vbox{\Large 
+\hypertarget{outline\thepart}{\noindent Outline Part. \thepart}}
+\printcontents[chapters]{}{0}{\setcounter{tocdepth}{0}}\vspace*{0.5pc}\hrule
+}%
+\newcommand{\chaptoc}{\stopcontents[sections]
+\startcontents[sections]
+\vspace*{1pc}\hrule\vspace*{0.5pc}% toc at beginning chapter
+\vbox{\Large 
+\hypertarget{outline\thechapter}{\noindent Outline Cap. \thechapter}}
+\printcontents[sections]{}{1}{\setcounter{tocdepth}{1}\Large}\vspace*{0.5pc}\hrule
+}%
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 \newcommand{\tool}[1]{\evt{Strumenti} #1 \begin{center}\line(1,0){250}\end{center}} %Strumenti
 \newcommand{\thalf}{t_{\frac{1}{2}}}
