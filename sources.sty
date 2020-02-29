@@ -1,5 +1,11 @@
 \ProvidesPackage{sources}
 
+\begin{filecontents}{biblatex-dm.cfg}
+\DeclareDatamodelFields[type=field,datatype=addendum]{searchbib}
+\DeclareDatamodelEntryfields{searchbib}
+\DeclareFieldFormat[online]{searchbib}{}% Used as a boolean variable
+\end{filecontents}
+
 \addbibresource{beyond.bib}
 \addbibresource{CA.bib}
 \addbibresource{migration.bib}
