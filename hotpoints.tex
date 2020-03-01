@@ -14,8 +14,12 @@
 \begingroup
 \nocite{*}
 \let\clearpage\relax
-\printbibliography[env=bibtwo,filter={pps},heading=bibintoc,title={\textcolor{antiquefuchsia}{Vincoli a formazione planetaria da modelli/osservazioni formazione sistema solare}}]
-\printbibliography[check=bibsearchdef,filter={pps},heading=bibintoc,title={\textcolor{antiquefuchsia}{Bib research}}]
+%\settoggle{bbx:note}{false}
+%\AtNextBibliography{\AtEveryBibitem{\clearlist{note}}}
+\boolfalse{isreasearch}
+\printbibliography[filter={pps},heading=bibintoc,title={\textcolor{antiquefuchsia}{Vincoli a formazione planetaria da modelli/osservazioni formazione sistema solare}}]
+\booltrue{isreasearch}
+\printbibliography[filter={pps},check=bibsearchdef,heading=bibintoc,title={\textcolor{antiquefuchsia}{Bib research}}]
 \endgroup
 \end{refsection}
 

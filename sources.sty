@@ -1,10 +1,12 @@
 \ProvidesPackage{sources}
 
-\begin{filecontents}{biblatex-dm.cfg}
-\DeclareDatamodelFields[type=field,datatype=addendum]{searchbib}
-\DeclareDatamodelEntryfields{searchbib}
-\DeclareFieldFormat[online]{searchbib}{}% Used as a boolean variable
-\end{filecontents}
+%\DeclareFieldFormat{searchbib}{}
+%\DeclareDatamodelFields[type=field,datatype=literal]{searchbib}
+%\DeclareDatamodelEntryfields[]{title,author,journal,volume,number,pages,year,publisher,addendum,keywords,searchbib}
+%\begin{filecontents*}{mymodels.dbx}
+%\DeclareDatamodelFields[type=field,datatype=verbatim]{searchbib}
+%\DeclareDatamodelEntryfields{searchbib}
+%\end{filecontents*}
 
 \addbibresource{beyond.bib}
 \addbibresource{CA.bib}

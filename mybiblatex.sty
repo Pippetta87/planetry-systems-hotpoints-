@@ -2,6 +2,9 @@
 
 %%%biblatex
 \usepackage[backend=biber,sorting=hot,maxbibnames=1,style=authoryear]{biblatex}
+%datamodel=mymodels
+
+%\DeclareFieldFormat[article,online,book]{searchbib}{}%
 
 \renewcommand*{\bibsetup}{% bibsetup
   \interlinepenalty=10000\relax % default is 5000
@@ -12,9 +15,9 @@
   \biburlsetup}
   
 %%% biblatex sorting schemes
-\DeclareSortingScheme{hot}{
+\DeclareSortingTemplate{hot}{
 \sort{\field{year}}
-\sort{\field{name}}
+\sort{\field{title}}
 }
 
 %%hedings
@@ -23,8 +26,19 @@
 %\markboth{#1}{#1}
 }
 
+%% SOURCE MAPS %%%
+%\DeclareSourcemap{
+%  \maps[datatype=bibtex]{
+%    \map{
+%      \step[fieldsource=searchbib]
+%      \step[fieldset=keywords, fieldvalue={defsb}]
+%    }
+%  }
+%}
+
 %%biblatex filters
 \defbibfilter{pps}{keyword={pps}}%%% cose da usare in PPS ora
+\defbibcheck{bibsearchdef}{\iffieldundef{note}{\skipentry}{}}% ha searchbib definito
 %%%%
 
 %\iffieldequals
@@ -36,11 +50,43 @@
 \defbibfilter{solsysplanets}{keyword={solar system} or keyword={Mercury} or keyword={Venus}}
 
 \defbibcheck{modesfreqobs}{\ifboolexpr{(test {\ifkeyword{splittings}} or test {\ifkeyword{instruments}} or test {\ifkeyword{keyword}{modes}} or test {\ifkeyword{frequencies}} or test {\ifkeyword{g-modes}} or test {\ifkeyword{p-modes}} or test {\ifkeyword{rotation}}) and test {\ifkeyword{rotation}}}{}{\skipentry}}%
-\defbibcheck{bibsearchdef}{\ifboolexpr{(test {\ifkeyword{splittings}} }{}{\skipentry}}%
+
+%\defbibcheck{bibsearchdef}{%
+%  \ifboolexpr{ 
+%    test {\iffieldundef{searchbib}}
+%  }{%
+%\skipentry
+%}{%
+%}
+%}
+
+%\defbibcheck{online}{%
+%  \ifboolexpr{ 
+%    not test {\iffieldundef{Url}} and not test {\iffieldundef{Urldate}}
+%  }{% Entry has both url and urldate -> it's a web source  
+%  }{%
+%    \skipentry
+%  }
+%}
 
 %%% bibliography environment ... (printbibliography left aligned)
 \DeclareFieldFormat{labelnumberwidth}{#1\adddot}%
 
+\newbool{isreasearch}
+
+\AtEveryBibitem{%
+ \ifbool{isreasearch}
+  {%
+   \clearfield{pages}%
+   \clearfield{volume}%
+   \clearfield{journal}%
+   \clearfield{addendum}
+  }{
+  \clearfield{note}}%
+  }
+  
+\DeclareFieldFormat*{note}{\newline\printtext{To scholar:} #1}
+    
 % default bibliography environment (from biblatex.sty)
 \defbibenvironment{bibliography} 
   {\list{}{%
@@ -52,7 +98,7 @@
   {\item}
 
 % 'numeric' bibliography environment (from numeric.bbx)
-\defbibenvironment{bibtwo}
+\defbibenvironment{bibliography}
   {\list
      {\printtext[labelnumberwidth]{%
         \printfield{prefixnumber}%
